@@ -19,8 +19,11 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -90,5 +93,23 @@ public class OrdersControllerTest {
         //then
         result.andExpect(status().isBadRequest());
 
+    }
+
+    @Test
+    public void should_return_204_code_when_set_user_to_orders() throws Exception {
+
+        //given
+        Orders orders =new Orders("存车","无人处理","粤A123123");
+
+        //when
+        ResultActions result = mvc.perform
+                (patch("/orders/{OrderId}/parkingBoy/{BoyId}", orders.getId(),1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(orders))
+                );
+
+        //then
+        result.andExpect(status().isNoContent())
+                .andDo(print());
     }
 }

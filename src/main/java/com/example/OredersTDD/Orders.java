@@ -26,6 +26,16 @@ public class Orders {
     @CreatedDate
     private ZonedDateTime createdDate = ZonedDateTime.now();
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserID(int userId) {
+        this.userId = userId;
+    }
+
+    int userId;
+
     public Orders(String type, String status, String carId) {
         this.type=type;
         this.status=status;
@@ -54,5 +64,21 @@ public class Orders {
 
     public void setCarId(String carId) {
         this.carId = carId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ZonedDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(ZonedDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 }

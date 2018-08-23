@@ -33,4 +33,14 @@ public class OrdersService {
     public boolean existCarid(String carId) {
         return ordersRepository.findBycarId(carId) != null && !ordersRepository.findBycarId(carId).getStatus().equals("无人管理");
     }
+
+    public void setUsersToOrders(int useId, int ordersId) {
+
+
+        Orders orders=ordersRepository.findById(ordersId).get();
+        orders.setUserID(useId);
+
+        ordersRepository.updateUserIdById(ordersId, useId);
+        ordersRepository.updateStatusById(ordersId, "存取中");
+    }
 }

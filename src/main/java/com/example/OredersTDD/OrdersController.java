@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/orders")
 public class OrdersController {
@@ -28,7 +28,13 @@ public class OrdersController {
         }else{
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+    }
 
-
+    //停车：指定停车员给订单
+    @PatchMapping("/{OrderId}/parkingBoy/{BoyId}")
+    public HttpEntity setUsersToOrders(@PathVariable("OrderId") int OrderId,
+                                       @PathVariable("BoyId") int BoyId) {
+        ordersService.setUsersToOrders(BoyId,OrderId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
