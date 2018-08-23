@@ -9,9 +9,9 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface OrdersRepository extends JpaRepository<Orders,Integer> {
+
+
+
+    @Query(value = "select * from orders where car_id = ?1 and status<>'取车完成'", nativeQuery = true)
     Orders findBycarId(String carId);
-
-
-//    @Query(value = "select * from orders where car_id = ?1 and status<>'取车完成'", nativeQuery = true)
-//    Orders findBycarId(String carId);
 }

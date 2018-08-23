@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -39,5 +40,17 @@ public class OrdersRepositoryTest {
         //then
         assertThat(ordersList.size(), is(1));
         assertThat(ordersList.get(0).getType(), is("存车"));
+    }
+
+    @Test
+    public void should_return_null_when_carId_not_exist() throws Exception{
+        //given
+        entityManager.persist(new Orders("存车","无人处理","粤A123123"));
+
+        //when
+        Orders orders = ordersRepository.findBycarId("粤A123");
+
+        //then
+        assertThat(orders, is(nullValue()));
     }
 }
