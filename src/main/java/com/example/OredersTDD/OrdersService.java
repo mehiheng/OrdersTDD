@@ -37,10 +37,12 @@ public class OrdersService {
     public Orders setUsersToOrders(int useId, int ordersId) {
         Orders orders=ordersRepository.findById(ordersId).get();
         orders.setUserID(useId);
-        ordersRepository.updateUserIdById(ordersId, useId);
-        ordersRepository.updateStatusById(ordersId, "存取中");
+        orders.setStatus("存取中");
+        ordersRepository.save(orders);
         Orders result = ordersRepository.findById(ordersId).get();
         return result;
     }
+
+
 
 }

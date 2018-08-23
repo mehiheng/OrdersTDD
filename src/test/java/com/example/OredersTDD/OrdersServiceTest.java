@@ -82,9 +82,8 @@ class OrdersServiceTest{
         //when
         Orders result = ordersService.setUsersToOrders(userId,orders.getId());
         //then
-
+        assertThat(result.getStatus(), is("存取中"));
         verify(ordersRepository,times(2)).findById(anyInt());
-        verify(ordersRepository).updateStatusById(anyInt(),anyString());
     }
 
 }
