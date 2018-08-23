@@ -53,4 +53,18 @@ public class OrdersRepositoryTest {
         //then
         assertThat(orders, is(nullValue()));
     }
+
+    @Test
+    public void should_return_orders_when_carId_is_exist() throws Exception{
+        //given
+        Orders orders = new Orders("存车","无人处理","粤A123123");
+        entityManager.persist(orders);
+
+        //when
+        Orders orders1 = ordersRepository.findBycarId("粤A123123");
+
+        //then
+        assertThat(orders, is(orders1));
+    }
+
 }
