@@ -1,7 +1,14 @@
 package com.example.OredersTDD;
 
 
-import org.hibernate.annotations.Entity;
+
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.ZonedDateTime;
 
 @Entity
 public class Orders {
@@ -9,7 +16,17 @@ public class Orders {
     private String status;
     private String carId;
 
-    public Orders(String type,String status,String carId) {
+    public Orders() {
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
+    @CreatedDate
+    private ZonedDateTime createdDate = ZonedDateTime.now();
+
+    public Orders(String type, String status, String carId) {
         this.type=type;
         this.status=status;
         this.carId=carId;
