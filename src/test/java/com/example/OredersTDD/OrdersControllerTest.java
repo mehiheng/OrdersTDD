@@ -45,7 +45,6 @@ public class OrdersControllerTest {
     @Test
     public void should_get_all_orders() throws Exception {
 
-
         //given
         Orders orders =new Orders("存车","无人处理","粤A123123");
         List<Orders> ordersList = Arrays.asList(orders);
