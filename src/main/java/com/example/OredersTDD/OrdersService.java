@@ -34,13 +34,13 @@ public class OrdersService {
         return ordersRepository.findBycarId(carId) != null && !ordersRepository.findBycarId(carId).getStatus().equals("无人管理");
     }
 
-    public void setUsersToOrders(int useId, int ordersId) {
-
-
+    public Orders setUsersToOrders(int useId, int ordersId) {
         Orders orders=ordersRepository.findById(ordersId).get();
         orders.setUserID(useId);
-
         ordersRepository.updateUserIdById(ordersId, useId);
         ordersRepository.updateStatusById(ordersId, "存取中");
+        Orders result = ordersRepository.findById(ordersId).get();
+        return result;
     }
+
 }

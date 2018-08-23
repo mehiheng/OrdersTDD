@@ -11,6 +11,10 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -64,6 +68,23 @@ class OrdersServiceTest{
 
         //then
         assertThat(result, is(false));
+    }
+
+    @Test
+    void should_update_status_from_STATUS_NO_to_STATUS_YES() {
+
+        //given
+        int userId = 1;
+        OrdersService ordersService = new OrdersService(ordersRepository);
+        Orders orders = new Orders("存车","无人处理","粤A123123");
+        when(ordersRepository.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(orders));
+
+        //when
+        Orders result = ordersService.setUsersToOrders(userId,orders.getId());
+        //then
+
+        verify(ordersRepository,times(2)).findById(anyInt());
+        verify(ordersRepository).updateStatusById(anyInt(),anyString());
     }
 
 }

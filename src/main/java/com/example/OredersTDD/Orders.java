@@ -19,6 +19,9 @@ public class Orders {
     public Orders() {
     }
 
+    public static String STATUS_YES="存取中";
+    public static String STATUS_NO="无人处理";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;

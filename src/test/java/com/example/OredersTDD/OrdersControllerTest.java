@@ -100,7 +100,6 @@ public class OrdersControllerTest {
 
         //given
         Orders orders =new Orders("存车","无人处理","粤A123123");
-
         //when
         ResultActions result = mvc.perform
                 (patch("/orders/{OrderId}/parkingBoy/{BoyId}", orders.getId(),1)
