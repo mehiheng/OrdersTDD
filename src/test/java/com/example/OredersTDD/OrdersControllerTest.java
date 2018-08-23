@@ -61,7 +61,7 @@ public class OrdersControllerTest {
     }
 
     @Test
-    public void should_return_201_code_when_create_order_successfully_carId_not_exist() throws Exception {
+    public void should_return_201_code_when_create_order_successfully_if_carId_not_exist() throws Exception {
 
         //given
         Orders orders =new Orders("存车","无人处理","粤A123123");
@@ -77,7 +77,7 @@ public class OrdersControllerTest {
     }
 
     @Test
-    public void should_return_400_code_when_create_order_fail_carId_is_exist() throws Exception {
+    public void should_return_400_code_when_create_order_fail_if_carId_is_exist() throws Exception {
 
         //given
         Orders orders =new Orders("存车","无人处理","粤A123123");

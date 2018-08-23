@@ -38,7 +38,7 @@ class OrdersServiceTest{
     }
 
     @Test
-    void should_return_true_when_create_order_successfully_carId_not_exist() {
+    void should_return_true_when_create_order_successfully_if_carId_not_exist() {
 
         //given
         OrdersService ordersService = new OrdersService(ordersRepository);
@@ -49,5 +49,20 @@ class OrdersServiceTest{
 
         //then
         assertThat(result, is(true));
+    }
+
+    @Test
+    void should_return_false_when_create_order_fail_if_carId_is_exist() {
+
+        //given
+        OrdersService ordersService = new OrdersService(ordersRepository);
+        Orders orders =new Orders("存车","无人处理","粤A123123");
+        Orders orders1 =new Orders("存车","无人处理","粤A123");
+        when(ordersRepository.findBycarId(any())).thenReturn(orders1);
+        //when
+        boolean result = ordersService.addOrders(orders);
+
+        //then
+        assertThat(result, is(false));
     }
 }
