@@ -21,4 +21,17 @@ public class OrdersService {
         return ordersRepository.findAll();
     }
 
+    public boolean addOrders(Orders orders) {
+        if (existCarid(orders.getCarId())) {
+            return false;
+        } else {
+            ordersRepository.save(orders);
+            return true;
+        }
+    }
+
+    public boolean existCarid(String carId) {
+        return true;
+//        return ordersRepository.findBycarId(carId) != null && !ordersRepository.findBycarId(carId).getStatus().equals("无人管理");
+    }
 }
