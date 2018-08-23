@@ -26,7 +26,7 @@ public class OrdersController {
         if(ordersService.addOrders(orders)){
             return new ResponseEntity(HttpStatus.CREATED);
         }else{
-            return new ResponseEntity(HttpStatus.FOUND);
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
 

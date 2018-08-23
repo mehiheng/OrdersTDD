@@ -61,7 +61,7 @@ public class OrdersControllerTest {
     }
 
     @Test
-    public void should_return_201_code_when_create_order_successfully() throws Exception {
+    public void should_return_201_code_when_create_order_successfully_carId_not_exist() throws Exception {
 
         //given
         Orders orders =new Orders("存车","无人处理","粤A123123");
@@ -73,6 +73,22 @@ public class OrdersControllerTest {
                 .content(mapper.writeValueAsString(orders)));
         //then
         result.andExpect(status().isCreated());
+
+    }
+
+    @Test
+    public void should_return_400_code_when_create_order_fail_carId_is_exist() throws Exception {
+
+        //given
+        Orders orders =new Orders("存车","无人处理","粤A123123");
+        List<Orders> ordersList = Arrays.asList(orders);
+        when(ordersService.addOrders(any())).thenReturn(false);
+        //when
+        ResultActions result = mvc.perform(post("/orders")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(orders)));
+        //then
+        result.andExpect(status().isBadRequest());
 
     }
 }
