@@ -31,7 +31,6 @@ public class OrdersService {
     }
 
     public boolean existCarid(String carId) {
-        return true;
-//        return ordersRepository.findBycarId(carId) != null && !ordersRepository.findBycarId(carId).getStatus().equals("无人管理");
+        return ordersRepository.findBycarId(carId) != null && !ordersRepository.findBycarId(carId).getStatus().equals("无人管理");
     }
 }

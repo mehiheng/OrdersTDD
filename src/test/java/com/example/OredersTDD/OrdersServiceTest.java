@@ -1,16 +1,16 @@
 package com.example.OredersTDD;
 
-import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 
@@ -21,7 +21,7 @@ class OrdersServiceTest{
     OrdersRepository ordersRepository;
 
 
-    @org.junit.jupiter.api.Test
+    @Test
     void should_return_all_orders() {
 
         //given
@@ -35,5 +35,19 @@ class OrdersServiceTest{
         //then
         assertThat(ordersList1.size(), is(1));
         assertThat(ordersList1.get(0).getType(), is("存车"));
+    }
+
+    @Test
+    void should_return_true_when_create_order_successfully_carId_not_exist() {
+
+        //given
+        OrdersService ordersService = new OrdersService(ordersRepository);
+        Orders orders =new Orders("存车","无人处理","粤A123123");
+        when(ordersRepository.findBycarId(any())).thenReturn(null);
+        //when
+        boolean result = ordersService.addOrders(orders);
+
+        //then
+        assertThat(result, is(true));
     }
 }
