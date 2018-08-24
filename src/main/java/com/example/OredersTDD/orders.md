@@ -7,3 +7,8 @@
     given orders
     when addParkOrders
     then return all created orders
+
+3. 指派停车单
+    given orderId，userId
+    when setUsersToOrders
+    then update the status of orders
